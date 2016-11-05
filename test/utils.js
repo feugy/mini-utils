@@ -20,7 +20,7 @@ describe('Utilities', () => {
       const logger = utils.getLogger()
       assert(logger)
       assert(logger.debug)
-      assert.equal(logger.fields.name, 'mini-utils')
+      assert.equal(logger.fields.name, 'mini-service-utils')
       done()
     })
 

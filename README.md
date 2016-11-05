@@ -33,8 +33,8 @@ Copyright [Damien Simonin Feugas][feugy] and other contributors, licensed under 
 [mini-service-url]: https://github.com/feugy/mini-service
 [david-image]: https://img.shields.io/david/feugy/mini-utils.svg
 [david-url]: https://david-dm.org/feugy/mini-utils
-[npm-image]: https://img.shields.io/npm/v/mini-utils.svg
-[npm-url]: https://npmjs.org/package/mini-utils
+[npm-image]: https://img.shields.io/npm/v/mini-service-utils.svg
+[npm-url]: https://npmjs.org/package/mini-service-utils
 [travis-image]: https://api.travis-ci.org/feugy/mini-utils.svg
 [travis-url]: https://travis-ci.org/feugy/mini-utils
 [coveralls-image]: https://img.shields.io/coveralls/feugy/mini-utils/master.svg

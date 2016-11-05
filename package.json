@@ -1,5 +1,5 @@
 {
-  "name": "mini-utils",
+  "name": "mini-service-utils",
   "version": "1.0.0",
   "description": "Shared utilities mini-* libraries: Micro services done simply",
   "main": "./lib/index.js",
