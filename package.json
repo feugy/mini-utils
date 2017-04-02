@@ -1,6 +1,6 @@
 {
   "name": "mini-service-utils",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Shared utilities mini-* libraries: Micro services done simply",
   "main": "./lib/index.js",
   "repository": {
@@ -14,26 +14,22 @@
     "lint": "eslint .",
     "submit-coverage": "cat coverage/lcov.info | coveralls -v",
     "nsp": "nsp check",
-    "update-deps": "next-update -k true"
+    "update-deps": "next-update -k true",
+    "prepush": "npm run nsp & npm test"
   },
   "dependencies": {
-    "bunyan": "1.8.4",
-    "joi": "9.2.0"
+    "bunyan": "~1.8.9",
+    "joi": "~10.4.1"
   },
   "devDependencies": {
-    "coveralls": "2.11.14",
-    "eslint": "3.9.1",
-    "ghooks": "1.3.2",
-    "lab": "11.1.0",
-    "lab-espower-transformer": "1.1.0",
-    "next-update": "1.5.1",
-    "nsp": "2.6.2",
-    "power-assert": "1.4.1",
-    "rewire": "2.5.2"
-  },
-  "config": {
-    "ghooks": {
-      "pre-push": "npm test"
-    }
+    "coveralls": "~2.13.0",
+    "eslint": "~3.19.0",
+    "husky": "~0.13.3",
+    "lab": "~11.1.0",
+    "lab-espower-transformer": "~1.1.0",
+    "next-update": "~1.5.1",
+    "nsp": "~2.6.3",
+    "power-assert": "~1.4.2",
+    "rewire": "~2.5.2"
   }
 }

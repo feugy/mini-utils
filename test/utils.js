@@ -9,6 +9,9 @@ const {describe, it, beforeEach} = lab
 
 describe('Utilities', () => {
 
+  /* eslint no-empty-function: 0 */
+  const noop = () => {}
+
   describe('getLogger', () => {
 
     beforeEach(done => {
@@ -117,9 +120,6 @@ describe('Utilities', () => {
 
   describe('getParamNames', () => {
 
-    /* eslint no-empty-function: 0 */
-    const noop = () => {}
-
     it('should fails on null', done => {
       assert.throws(() => utils.getParamNames(null), /unsupported function null/)
       done()
@@ -146,7 +146,7 @@ describe('Utilities', () => {
           return Promise.resolve({time: new Date()})
         }
       }
-      assert.deepEqual(utils.getParamNames(obj.ping), [])
+      assert.deepStrictEqual(utils.getParamNames(obj.ping), [])
       done()
     })
 
@@ -155,13 +155,13 @@ describe('Utilities', () => {
       function declared() {
         noop()
       }
-      assert.deepEqual(utils.getParamNames(declared), [])
+      assert.deepStrictEqual(utils.getParamNames(declared), [])
       done()
     })
 
     it('should handle empty anonymous function', done => {
       /* eslint prefer-arrow-callback: 0 */
-      assert.deepEqual(utils.getParamNames(function() {
+      assert.deepStrictEqual(utils.getParamNames(function() {
         noop()
       }), [])
       done()
@@ -169,14 +169,14 @@ describe('Utilities', () => {
 
     it('should handle named function', done => {
       /* eslint prefer-arrow-callback: 0 */
-      assert.deepEqual(utils.getParamNames(function named() {
+      assert.deepStrictEqual(utils.getParamNames(function named() {
         noop()
       }), [])
       done()
     })
 
     it('should handle empty arrow function', done => {
-      assert.deepEqual(utils.getParamNames(() => {
+      assert.deepStrictEqual(utils.getParamNames(() => {
         noop()
       }), [])
       done()
@@ -187,13 +187,13 @@ describe('Utilities', () => {
       function declared(a) {
         noop()
       }
-      assert.deepEqual(utils.getParamNames(declared), ['a'])
+      assert.deepStrictEqual(utils.getParamNames(declared), ['a'])
       done()
     })
 
     it('should handle anonymous function with single parameter', done => {
       /* eslint prefer-arrow-callback: 0,  no-unused-vars:0 */
-      assert.deepEqual(utils.getParamNames(function(a) {
+      assert.deepStrictEqual(utils.getParamNames(function(a) {
         noop()
       }), ['a'])
       done()
@@ -201,7 +201,7 @@ describe('Utilities', () => {
 
     it('should handle named function with single parameter', done => {
       /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepEqual(utils.getParamNames(function named(a) {
+      assert.deepStrictEqual(utils.getParamNames(function named(a) {
         noop()
       }), ['a'])
       done()
@@ -209,7 +209,7 @@ describe('Utilities', () => {
 
     it('should handle empty arrow function with single parameter', done => {
       /* eslint no-unused-vars:0 */
-      assert.deepEqual(utils.getParamNames(a => {
+      assert.deepStrictEqual(utils.getParamNames(a => {
         noop()
       }), ['a'])
       done()
@@ -220,13 +220,13 @@ describe('Utilities', () => {
       function declared(a, b, c) {
         noop()
       }
-      assert.deepEqual(utils.getParamNames(declared), ['a', 'b', 'c'])
+      assert.deepStrictEqual(utils.getParamNames(declared), ['a', 'b', 'c'])
       done()
     })
 
     it('should handle anonymous function with multiple parameters', done => {
       /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepEqual(utils.getParamNames(function(a, b, c) {
+      assert.deepStrictEqual(utils.getParamNames(function(a, b, c) {
         noop()
       }), ['a', 'b', 'c'])
       done()
@@ -234,7 +234,7 @@ describe('Utilities', () => {
 
     it('should handle named function with multiple parameters', done => {
       /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepEqual(utils.getParamNames(function named(a, b, c) {
+      assert.deepStrictEqual(utils.getParamNames(function named(a, b, c) {
         noop()
       }), ['a', 'b', 'c'])
       done()
@@ -242,7 +242,7 @@ describe('Utilities', () => {
 
     it('should handle empty arrow function with multiple parameters', done => {
       /* eslint no-unused-vars:0 */
-      assert.deepEqual(utils.getParamNames((a, b, c) => {
+      assert.deepStrictEqual(utils.getParamNames((a, b, c) => {
         noop()
       }), ['a', 'b', 'c'])
       done()
@@ -253,13 +253,13 @@ describe('Utilities', () => {
       function declared(a, b, c = false) {
         noop()
       }
-      assert.deepEqual(utils.getParamNames(declared), ['a', 'b', 'c'])
+      assert.deepStrictEqual(utils.getParamNames(declared), ['a', 'b', 'c'])
       done()
     })
 
     it('should handle anonymous function with default values', done => {
       /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepEqual(utils.getParamNames(function(a, b, c = 10) {
+      assert.deepStrictEqual(utils.getParamNames(function(a, b, c = 10) {
         noop()
       }), ['a', 'b', 'c'])
       done()
@@ -267,7 +267,7 @@ describe('Utilities', () => {
 
     it('should handle named function with default values', done => {
       /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepEqual(utils.getParamNames(function named(a, b, c = null) {
+      assert.deepStrictEqual(utils.getParamNames(function named(a, b, c = null) {
         noop()
       }), ['a', 'b', 'c'])
       done()
@@ -275,9 +275,61 @@ describe('Utilities', () => {
 
     it('should handle empty arrow function with default values', done => {
       /* eslint no-unused-vars:0 */
-      assert.deepEqual(utils.getParamNames((a, b, c = []) => {
+      assert.deepStrictEqual(utils.getParamNames((a, b, c = []) => {
         noop()
       }), ['a', 'b', 'c'])
+      done()
+    })
+  })
+
+  describe('extractGroups', () => {
+
+    it('should get group from parameters', done => {
+      const name = 'test'
+      const init = noop
+      assert.deepStrictEqual(utils.extractGroups({name, init}), {
+        groups: [{name, init}],
+        groupOpts: {[name]: {name, init}}
+      })
+      done()
+    })
+
+    it('should get groups from property', done => {
+      const name1 = 'test1'
+      const init1 = noop
+      const name2 = 'test2'
+      const init2 = noop
+      assert.deepStrictEqual(utils.extractGroups({
+        groups: [{name: name1, init: init1}, {name: name1, init: init1}]
+      }), {
+        groups: [{name: name1, init: init1}, {name: name1, init: init1}],
+        groupOpts: {}
+      })
+      done()
+    })
+
+    it('should get group options from property', done => {
+      const name1 = 'test1'
+      const init1 = noop
+      const name2 = 'test2'
+      const init2 = noop
+      assert.deepStrictEqual(utils.extractGroups({
+        groups: [{name: name1, init: init1}, {name: name1, init: init1}],
+        groupOpts: {[name1]: {name: name1}, [name2]: {name: name2}}
+      }), {
+        groups: [{name: name1, init: init1}, {name: name1, init: init1}],
+        groupOpts: {[name1]: {name: name1}, [name2]: {name: name2}}
+      })
+      done()
+    })
+
+    it('should fail if no group found', done => {
+      assert.throws(() => utils.extractGroups({name: 'test'}), /No APIs nor APIs groups defined/)
+      done()
+    })
+
+    it('should fail on invalid group found', done => {
+      assert.throws(() => utils.extractGroups({groups: ['not a group']}), /Group definition at position 0/)
       done()
     })
   })
