@@ -31,6 +31,7 @@ Copyright [Damien Simonin Feugas][feugy] and other contributors, licensed under 
 [nearform]: http://nearform.com
 [feugy]: https://github.com/feugy
 [mini-service-url]: https://github.com/feugy/mini-service
+[mini-client-url]: https://github.com/feugy/mini-client
 [david-image]: https://img.shields.io/david/feugy/mini-utils.svg
 [david-url]: https://david-dm.org/feugy/mini-utils
 [npm-image]: https://img.shields.io/npm/v/mini-service-utils.svg
