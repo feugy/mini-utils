@@ -16,6 +16,8 @@ Its principles are the following:
 
 All mini-* libraries use the latest ES6 features, so they requires node 6+
 
+Please checkout the [API reference][api-reference]
+
 
 This project was kindly sponsored by [nearForm][nearform].
 
@@ -24,6 +26,16 @@ This project was kindly sponsored by [nearForm][nearform].
 Copyright [Damien Simonin Feugas][feugy] and other contributors, licensed under [MIT](./LICENSE).
 
 ## Changelog
+
+### 2.2.0
+- Add extractValidate that allow validation objects in options
+- Better documentation
+
+### 2.0.0
+- Rename service to group
+- Introduce extractGroup()
+- Upgrade all deps to latests
+- Use husky instead of ghooks
 
 ### 1.0.0
 - initial release
@@ -41,3 +53,4 @@ Copyright [Damien Simonin Feugas][feugy] and other contributors, licensed under 
 [coveralls-image]: https://img.shields.io/coveralls/feugy/mini-utils/master.svg
 [coveralls-url]: https://coveralls.io/r/feugy/mini-utils?branch=master
 [distributed-monolith]: https://www.infoq.com/news/2016/02/services-distributed-monolith
+[api-reference]: https://feugy.github.io/mini-utils/

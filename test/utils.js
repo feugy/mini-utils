@@ -12,6 +12,48 @@ describe('Utilities', () => {
   /* eslint no-empty-function: 0 */
   const noop = () => {}
 
+  describe('extractValidate', () => {
+
+    it('should extract from api.validate', done => {
+      const id = 'test'
+      const apis = {
+        [id]: () => {}
+      }
+      const validation = Joi.array()
+      apis[id].validate = validation
+      assert.deepStrictEqual(utils.extractValidate(id, apis), validation)
+      done()
+    })
+
+    it('should extract from opts.validate', done => {
+      const id = 'test2'
+      const apis = {
+        [id]: () => {}
+      }
+      const validation = Joi.array()
+      assert.deepStrictEqual(utils.extractValidate(id, apis, {validate: validation}), validation)
+      done()
+    })
+
+    it('should not fail on missing validate key', done => {
+      const id = 'test3'
+      const apis = {
+        [id]: () => {}
+      }
+      assert.strictEqual(utils.extractValidate(id, apis, {}), null)
+      done()
+    })
+
+    it('should not fail on missing options', done => {
+      const id = 'test4'
+      const apis = {
+        [id]: () => {}
+      }
+      assert.strictEqual(utils.extractValidate(id, apis), null)
+      done()
+    })
+  })
+
   describe('getLogger', () => {
 
     beforeEach(done => {

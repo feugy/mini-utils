@@ -1,21 +1,23 @@
 {
   "name": "mini-service-utils",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "description": "Shared utilities mini-* libraries: Micro services done simply",
-  "main": "./lib/index.js",
+  "author": "feugy <damien.feugas@gmail.com>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/feugy/mini-utils"
   },
-  "author": "feugy <damien.feugas@gmail.com>",
-  "license": "MIT",
+  "main": "./lib/index.js",
   "scripts": {
-    "test": "lab test",
+    "doc": "jsdoc -c jsdoc.json",
     "lint": "eslint .",
-    "submit-coverage": "cat coverage/lcov.info | coveralls -v",
     "nsp": "nsp check",
+    "prepush": "npm run nsp & npm test",
+    "submit-coverage": "cat coverage/lcov.info | coveralls -v",
+    "test": "lab test",
     "update-deps": "next-update -k true",
-    "prepush": "npm run nsp & npm test"
+    "watch-doc": "watch \"npm run doc\" ./lib"
   },
   "dependencies": {
     "bunyan": "~1.8.9",
@@ -23,13 +25,16 @@
   },
   "devDependencies": {
     "coveralls": "~2.13.0",
+    "docdash": "~0.4.0",
     "eslint": "~3.19.0",
     "husky": "~0.13.3",
+    "jsdoc": "~3.4.3",
     "lab": "~11.1.0",
     "lab-espower-transformer": "~1.1.0",
     "next-update": "~1.5.1",
     "nsp": "~2.6.3",
     "power-assert": "~1.4.2",
-    "rewire": "~2.5.2"
+    "rewire": "~2.5.2",
+    "watch": "~1.0.2"
   }
 }

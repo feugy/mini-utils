@@ -1,0 +1,25 @@
+{
+  "source": {
+    "include": "./lib"
+  },
+  "opts": {
+    "destination": "docs",
+    "pedantic": true,
+    "recurse": true,
+    "readme": "./README.md",
+    "template": "node_modules/docdash",
+    "private": true
+  },
+  "templates": {
+    "default": {
+      "includeDate": false
+    },
+    "docdash": {
+      "sort": true
+    }
+  },
+  "plugins": [
+    "plugins/markdown",
+    "plugins/summarize"
+  ]
+}
