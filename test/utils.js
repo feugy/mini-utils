@@ -155,7 +155,14 @@ describe('Utilities', () => {
     it('should report validation errors', done => {
       const error = utils.validateParams({count: 1}, Joi.object({other: Joi.string().required()}), 'test', 1)
       assert(error)
+      assert(error.message.includes('API test'))
       assert(error.message.includes('"other" is required]'))
+      done()
+    })
+
+    it('should allow valid invokations', done => {
+      const error = utils.validateParams({count: 1}, Joi.object({count: Joi.number().required()}), 'test', 1)
+      assert.strictEqual(error, null)
       done()
     })
   })

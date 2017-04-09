@@ -134,14 +134,19 @@ exports.arrayToObj = (array, properties) => {
  * @param {Joi} schema        Joi validation schema
  * @param {String} id         API id used in error detailed report
  * @param {Number} expected   expected number of values
- * @returns {Error}           if validation failed, the detailed error, or null if values are valid
+ * @returns {Error|null}      if validation failed, the detailed error, or null if values are valid
  */
 exports.validateParams = (values, schema, id, expected) => {
   if (Object.keys(values).length > expected) {
     // too many values provided
     return new Error(`API ${id} must contain at most ${expected} parameters`)
   }
-  return schema.validate(values).error
+  const result = schema.validate(values)
+  if (result.error) {
+    result.error.message = `Incorrect parameters for API ${id}: ${result.error.message}`
+    return result.error
+  }
+  return null
 }
 
 /**
@@ -194,16 +199,15 @@ exports.extractGroups = opts => {
  * @description Each exposed API can have a Joi object assigned to validate received parameters
  * This validation object can be either:
  * - in the `validate` property of the API function
- * - in the `validations` hash, stored under the property named after the API itself
+ * - in the `validate` property of the API group options
  * @param {String} id       name of the exposed API for which validation object is researched
  * @param {Object} apis     hash containing the exposed API function
  * @param {Object} opts     options that may contains validation hash
- * @param {Object} [opts.validations]  gather all validation objects of exposed APIs. May contains one property for each
- * API (using the same name)
+ * @param {Object} [opts.validate]  May contains validation object for the exposed API
  * @return {Joi|null}       validation object found, or null
  */
 exports.extractValidate = (id, apis, opts) =>
-  apis[id].validate || opts &amp;&amp; opts.validations &amp;&amp; opts.validations[id] || null
+  apis[id].validate || opts &amp;&amp; opts.validate || null
 </code></pre>
         </article>
     </section>

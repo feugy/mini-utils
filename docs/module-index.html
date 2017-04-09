@@ -347,7 +347,7 @@ with corresponding values from <code>array</code></p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line135">line 135</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line140">line 140</a>
     </li></ul></dd>
     
 
@@ -506,7 +506,7 @@ The specify parameter could be the group itself, mixed with the options</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line166">line 166</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line170">line 170</a>
     </li></ul></dd>
     
 
@@ -550,7 +550,7 @@ The specify parameter could be the group itself, mixed with the options</p>
 This validation object can be either:</p>
 <ul>
 <li>in the <code>validate</code> property of the API function</li>
-<li>in the <code>validations</code> hash, stored under the property named after the API itself</li>
+<li>in the <code>validate</code> property of the API group options</li>
 </ul>
 </div>
 
@@ -679,7 +679,7 @@ This validation object can be either:</p>
 
         <tr>
             
-                <td class="name"><code>validations</code></td>
+                <td class="name"><code>validate</code></td>
             
 
             <td class="type">
@@ -705,8 +705,7 @@ This validation object can be either:</p>
 
             
 
-            <td class="description last"><p>gather all validation objects of exposed APIs. May contains one property for each
-API (using the same name)</p></td>
+            <td class="description last"><p>May contains validation object for the exposed API</p></td>
         </tr>
 
     
@@ -1144,7 +1143,7 @@ API (using the same name)</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line113">line 113</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line118">line 118</a>
     </li></ul></dd>
     
 
@@ -1283,7 +1282,7 @@ API (using the same name)</p></td>
 
     
 
-    <h4 class="name" id=".validateParams"><span class="type-signature">(static) </span>validateParams<span class="signature">(values, schema, id, expected)</span><span class="type-signature"> &rarr; {Error}</span></h4>
+    <h4 class="name" id=".validateParams"><span class="type-signature">(static) </span>validateParams<span class="signature">(values, schema, id, expected)</span><span class="type-signature"> &rarr; {Error|null}</span></h4>
 
     
     <p class="summary">Validates some values with the given schema, with a custom error message whenmore values than expected are provided</p>
@@ -1492,6 +1491,9 @@ API (using the same name)</p></td>
     <dd>
         
 <span class="param-type">Error</span>
+|
+
+<span class="param-type">null</span>
 
 
     </dd>
@@ -1519,7 +1521,7 @@ API (using the same name)</p></td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line121">line 121</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line126">line 126</a>
     </li></ul></dd>
     
 

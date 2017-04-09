@@ -27,8 +27,9 @@ Copyright [Damien Simonin Feugas][feugy] and other contributors, licensed under 
 
 ## Changelog
 
-### 2.2.0
+### 2.2.1
 - Add extractValidate that allow validation objects in options
+- Include API name in validation errors
 - Better documentation
 
 ### 2.0.0
