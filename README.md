@@ -27,6 +27,10 @@ Copyright [Damien Simonin Feugas][feugy] and other contributors, licensed under 
 
 ## Changelog
 
+### 2.3.0
+- Expose CRC32 checksum header name
+- Dependencies update
+
 ### 2.2.1
 - Add extractValidate that allow validation objects in options
 - Include API name in validation errors
