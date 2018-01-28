@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-index.html">index</a><ul class='methods'><li data-type='method'><a href="module-index.html#.arrayToObj">arrayToObj</a></li><li data-type='method'><a href="module-index.html#.extractGroups">extractGroups</a></li><li data-type='method'><a href="module-index.html#.extractValidate">extractValidate</a></li><li data-type='method'><a href="module-index.html#.getLogger">getLogger</a></li><li data-type='method'><a href="module-index.html#.getParamNames">getParamNames</a></li><li data-type='method'><a href="module-index.html#.isApi">isApi</a></li><li data-type='method'><a href="module-index.html#.validateParams">validateParams</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-index.html">index</a><ul class='methods'><li data-type='method'><a href="module-index.html#.arrayToObj">arrayToObj</a></li><li data-type='method'><a href="module-index.html#.enrichError">enrichError</a></li><li data-type='method'><a href="module-index.html#.extractGroups">extractGroups</a></li><li data-type='method'><a href="module-index.html#.extractValidate">extractValidate</a></li><li data-type='method'><a href="module-index.html#.getLogger">getLogger</a></li><li data-type='method'><a href="module-index.html#.getParamNames">getParamNames</a></li><li data-type='method'><a href="module-index.html#.isApi">isApi</a></li><li data-type='method'><a href="module-index.html#.validateParams">validateParams</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -39,6 +39,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>const bunyan = require('bunyan')
 const joi = require('joi')
+const {boomify} = require('boom')
 const {name} = require('../package.json')
 
 /**
@@ -126,10 +127,10 @@ exports.arrayToObj = (array, properties) => {
   }
   return obj
 }
-
 /**
  * @summary Validates some values with the given schema, with a custom error message when
  * more values than expected are provided
+ * @deprecated perform validation manually and use `enrichError()`
  * @param {Object} values     validated values, provided into a hash
  * @param {Joi} schema        Joi validation schema
  * @param {String} id         API id used in error detailed report
@@ -137,6 +138,8 @@ exports.arrayToObj = (array, properties) => {
  * @returns {Error|null}      if validation failed, the detailed error, or null if values are valid
  */
 exports.validateParams = (values, schema, id, expected) => {
+  process.emitWarning('[mini-utils] validateParams() will be deprecated in next major version. '
+    + 'Use enrichError() instead, and see https://github.com/feugy/mini-utils/blob/master/CHANGELOG.md')
   if (Object.keys(values).length > expected) {
     // too many values provided
     return new Error(`API ${id} must contain at most ${expected} parameters`)
@@ -147,6 +150,32 @@ exports.validateParams = (values, schema, id, expected) => {
     return result.error
   }
   return null
+}
+
+/**
+ * @summary Enrich validation error for a given API, with friendly message
+ * @description When enriching validation error for
+ * - input parameters, a 400 (Bad Request) Boom error is returned
+ * - returned results, a 512 (Bad Response) Boom error is returned
+ *
+ * @param {ValidationError} err       Joi validation error, or null
+ * @param {String} id                 API id used in error detailed report
+ * @param {Boomean} [forInput = true] true when enriching error for input parameters,
+ *                                    false for returned result
+ * @returns {Error|null}              the enriched detailed error, or null err was so
+ */
+exports.enrichError = (err, id, forInput = true) => {
+  if (!err) {
+    return null
+  }
+  // customize error message for convenience
+  err.message = `Incorrect ${forInput ? 'parameters' : 'response'} for API ${id}: ${err.message}`
+  const error = boomify(err, {statusCode: forInput ? 400 : 512})
+  if (!forInput) {
+    error.output.payload.error = 'Bad Response'
+  }
+
+  return error
 }
 
 /**
@@ -196,18 +225,19 @@ exports.extractGroups = opts => {
 
 /**
  * @summary Extract validation objects for a given API
- * @description Each exposed API can have a Joi object assigned to validate received parameters
+ * @description Each exposed API can have a Joi object assigned to validate received parameters/response
  * This validation object can be either:
- * - in the `validate` property of the API function
- * - in the `validate` property of the API group options
+ * - in the clause property of the API function
+ * - in the clause property of the API group options
  * @param {String} id       name of the exposed API for which validation object is researched
  * @param {Object} apis     hash containing the exposed API function
  * @param {Object} opts     options that may contains validation hash
  * @param {Object} [opts.validate]  May contains validation object for the exposed API
+ * @param {String} [clause = 'validate']  name of the searched clause, defaults to 'validate'
  * @return {Joi|null}       validation object found, or null
  */
-exports.extractValidate = (id, apis, opts) =>
-  apis[id].validate || opts &amp;&amp; opts.validate || null
+exports.extractValidate = (id, apis, opts, clause = 'validate') =>
+  apis[id][clause] || opts &amp;&amp; opts[clause] || null
 
 /**
  * HTTP header name used in response to exchange exposed API checksum.

@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-index.html">index</a><ul class='methods'><li data-type='method'><a href="module-index.html#.arrayToObj">arrayToObj</a></li><li data-type='method'><a href="module-index.html#.extractGroups">extractGroups</a></li><li data-type='method'><a href="module-index.html#.extractValidate">extractValidate</a></li><li data-type='method'><a href="module-index.html#.getLogger">getLogger</a></li><li data-type='method'><a href="module-index.html#.getParamNames">getParamNames</a></li><li data-type='method'><a href="module-index.html#.isApi">isApi</a></li><li data-type='method'><a href="module-index.html#.validateParams">validateParams</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-index.html">index</a><ul class='methods'><li data-type='method'><a href="module-index.html#.arrayToObj">arrayToObj</a></li><li data-type='method'><a href="module-index.html#.enrichError">enrichError</a></li><li data-type='method'><a href="module-index.html#.extractGroups">extractGroups</a></li><li data-type='method'><a href="module-index.html#.extractValidate">extractValidate</a></li><li data-type='method'><a href="module-index.html#.getLogger">getLogger</a></li><li data-type='method'><a href="module-index.html#.getParamNames">getParamNames</a></li><li data-type='method'><a href="module-index.html#.isApi">isApi</a></li><li data-type='method'><a href="module-index.html#.validateParams">validateParams</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -63,7 +63,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line5">line 5</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -158,7 +158,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line177">line 177</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line207">line 207</a>
     </li></ul></dd>
     
 
@@ -234,7 +234,7 @@ Will contain the CRC-32 checksum of the <code>JSON.stringify(exposed.apis)</code
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line78">line 78</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line79">line 79</a>
     </li></ul></dd>
     
 
@@ -403,6 +403,261 @@ with corresponding values from <code>array</code></p>
 
     
 
+    <h4 class="name" id=".enrichError"><span class="type-signature">(static) </span>enrichError<span class="signature">(err, id, forInput<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Error|null}</span></h4>
+
+    
+    <p class="summary"><p>Enrich validation error for a given API, with friendly message</p></p>
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line128">line 128</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>When enriching validation error for</p>
+<ul>
+<li>input parameters, a 400 (Bad Request) Boom error is returned</li>
+<li>returned results, a 512 (Bad Response) Boom error is returned</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>err</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ValidationError</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Joi validation error, or null</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>API id used in error detailed report</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>forInput</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boomean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>true</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>true when enriching error for input parameters,
+                                   false for returned result</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>the enriched detailed error, or null err was so</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Error</span>
+|
+
+<span class="param-type">null</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
     <h4 class="name" id=".extractGroups"><span class="type-signature">(static) </span>extractGroups<span class="signature">(opts)</span><span class="type-signature"> &rarr; {ExtractionResult}</span></h4>
 
     
@@ -417,7 +672,7 @@ with corresponding values from <code>array</code></p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line140">line 140</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line169">line 169</a>
     </li></ul></dd>
     
 
@@ -562,7 +817,7 @@ The specify parameter could be the group itself, mixed with the options</p>
 
     
 
-    <h4 class="name" id=".extractValidate"><span class="type-signature">(static) </span>extractValidate<span class="signature">(id, apis, opts)</span><span class="type-signature"> &rarr; {Joi|null}</span></h4>
+    <h4 class="name" id=".extractValidate"><span class="type-signature">(static) </span>extractValidate<span class="signature">(id, apis, opts, clause<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Joi|null}</span></h4>
 
     
     <p class="summary"><p>Extract validation objects for a given API</p></p>
@@ -576,7 +831,7 @@ The specify parameter could be the group itself, mixed with the options</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line170">line 170</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line200">line 200</a>
     </li></ul></dd>
     
 
@@ -616,11 +871,11 @@ The specify parameter could be the group itself, mixed with the options</p>
 
 
 <div class="description">
-    <p>Each exposed API can have a Joi object assigned to validate received parameters
+    <p>Each exposed API can have a Joi object assigned to validate received parameters/response
 This validation object can be either:</p>
 <ul>
-<li>in the <code>validate</code> property of the API function</li>
-<li>in the <code>validate</code> property of the API group options</li>
+<li>in the clause property of the API function</li>
+<li>in the clause property of the API group options</li>
 </ul>
 </div>
 
@@ -647,7 +902,11 @@ This validation object can be either:</p>
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -672,7 +931,19 @@ This validation object can be either:</p>
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"><p>name of the exposed API for which validation object is researched</p></td>
@@ -695,7 +966,19 @@ This validation object can be either:</p>
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"><p>hash containing the exposed API function</p></td>
@@ -718,7 +1001,19 @@ This validation object can be either:</p>
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
             
 
             <td class="description last"><p>options that may contains validation hash</p>
@@ -786,6 +1081,45 @@ This validation object can be either:</p>
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>clause</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>'validate'</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>name of the searched clause, defaults to 'validate'</p></td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -848,7 +1182,7 @@ This validation object can be either:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line18">line 18</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line19">line 19</a>
     </li></ul></dd>
     
 
@@ -1021,7 +1355,7 @@ This validation object can be either:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line44">line 44</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line45">line 45</a>
     </li></ul></dd>
     
 
@@ -1213,7 +1547,7 @@ This validation object can be either:</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line118">line 118</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line147">line 147</a>
     </li></ul></dd>
     
 
@@ -1367,7 +1701,7 @@ more values than expected are provided</p></p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line100">line 100</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line101">line 101</a>
     </li></ul></dd>
     
 
@@ -1385,6 +1719,8 @@ more values than expected are provided</p></p>
 
     
 
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>perform validation manually and use `enrichError()`</li></ul></dd>
     
 
     
@@ -1592,7 +1928,7 @@ more values than expected are provided</p></p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line126">line 126</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line155">line 155</a>
     </li></ul></dd>
     
 

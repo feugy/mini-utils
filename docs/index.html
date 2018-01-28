@@ -22,7 +22,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-index.html">index</a><ul class='methods'><li data-type='method'><a href="module-index.html#.arrayToObj">arrayToObj</a></li><li data-type='method'><a href="module-index.html#.extractGroups">extractGroups</a></li><li data-type='method'><a href="module-index.html#.extractValidate">extractValidate</a></li><li data-type='method'><a href="module-index.html#.getLogger">getLogger</a></li><li data-type='method'><a href="module-index.html#.getParamNames">getParamNames</a></li><li data-type='method'><a href="module-index.html#.isApi">isApi</a></li><li data-type='method'><a href="module-index.html#.validateParams">validateParams</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-index.html">index</a><ul class='methods'><li data-type='method'><a href="module-index.html#.arrayToObj">arrayToObj</a></li><li data-type='method'><a href="module-index.html#.enrichError">enrichError</a></li><li data-type='method'><a href="module-index.html#.extractGroups">extractGroups</a></li><li data-type='method'><a href="module-index.html#.extractValidate">extractValidate</a></li><li data-type='method'><a href="module-index.html#.getLogger">getLogger</a></li><li data-type='method'><a href="module-index.html#.getParamNames">getParamNames</a></li><li data-type='method'><a href="module-index.html#.isApi">isApi</a></li><li data-type='method'><a href="module-index.html#.validateParams">validateParams</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -48,6 +48,7 @@
     <section class="readme">
         <article><p><a href="https://npmjs.org/package/mini-service-utils"><img src="https://img.shields.io/npm/v/mini-service-utils.svg" alt="NPM Version"></a>
 <a href="https://david-dm.org/feugy/mini-utils"><img src="https://img.shields.io/david/feugy/mini-utils.svg" alt="Dependencies"></a>
+<a href="https://nodesecurity.io/orgs/perso/projects/6bc9b474-6f9e-4db0-a4d3-c3bf5443a63a"><img src="https://nodesecurity.io/orgs/perso/projects/6bc9b474-6f9e-4db0-a4d3-c3bf5443a63a/badge" alt="NSP Status"></a>
 <a href="https://travis-ci.org/feugy/mini-utils"><img src="https://api.travis-ci.org/feugy/mini-utils.svg" alt="Build"></a>
 <a href="https://coveralls.io/r/feugy/mini-utils?branch=master"><img src="https://img.shields.io/coveralls/feugy/mini-utils/master.svg" alt="Test Coverage"></a></p>
 <h1>Minimalist µServices</h1><p>The goal of <a href="https://github.com/feugy/mini-service">mini-service</a> is to give the minimal structure to implement a µService, that can be invoked locally or remotely.
@@ -59,28 +60,10 @@
 <li>hide deployment details and provide simple-yet-working solution</li>
 <li>promises based</li>
 </ul>
-<p>All mini-* libraries use the latest ES6 features, so they requires node 6+</p>
+<p>All mini-* libraries use the latest ES2017 features, so they requires node 8+</p>
 <p>Please checkout the <a href="https://feugy.github.io/mini-utils/">API reference</a></p>
 <p>This project was kindly sponsored by <a href="http://nearform.com">nearForm</a>.</p>
-<h2>License</h2><p>Copyright <a href="https://github.com/feugy">Damien Simonin Feugas</a> and other contributors, licensed under <a href="./LICENSE">MIT</a>.</p>
-<h2>Changelog</h2><h3>2.3.0</h3><ul>
-<li>Expose CRC32 checksum header name</li>
-<li>Dependencies update</li>
-</ul>
-<h3>2.2.1</h3><ul>
-<li>Add extractValidate that allow validation objects in options</li>
-<li>Include API name in validation errors</li>
-<li>Better documentation</li>
-</ul>
-<h3>2.0.0</h3><ul>
-<li>Rename service to group</li>
-<li>Introduce extractGroup()</li>
-<li>Upgrade all deps to latests</li>
-<li>Use husky instead of ghooks</li>
-</ul>
-<h3>1.0.0</h3><ul>
-<li>initial release</li>
-</ul></article>
+<h2>License</h2><p>Copyright <a href="https://github.com/feugy">Damien Simonin Feugas</a> and other contributors, licensed under <a href="./LICENSE">MIT</a>.</p></article>
     </section>
 
 
