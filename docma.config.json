@@ -12,7 +12,7 @@
   },
   "app": {
     "title": "Mini-utils documentation",
-    "base": "/docs",
+    "base": "/mini-utils",
     "server": "github"
   },
   "template": {
