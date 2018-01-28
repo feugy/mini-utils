@@ -1,0 +1,43 @@
+{
+  "src": [
+    "./lib/**/*.js",
+    "./*.md"
+  ],
+  "dest": "./docs",
+  "jsdoc": {
+    "allowUnknownTags": false,
+    "hierarchy": true,
+    "recurse": true,
+    "sort": "grouped"
+  },
+  "app": {
+    "title": "Mini-utils documentation",
+    "base": "/docs",
+    "server": "github"
+  },
+  "template": {
+    "path": "default",
+    "outline": "flat",
+    "options": {
+      "title": "mini-service-utils",
+      "navItems": [{
+        "iconClass": "ico-location",
+        "label": "Welcome",
+        "href": "?content=readme"
+      }, {
+        "iconClass": "ico-book",
+        "label": "API Reference",
+        "href": "?api"
+      }, {
+        "iconClass": "ico-direction",
+        "label": "Changelog",
+        "href": "?content=changelog"
+      }, {
+        "iconClass": "ico-md ico-github",
+        "label": "GitHub",
+        "href": "https://github.com/feugy/mini-utils",
+        "target": "_blank"
+      }]
+    }
+  }
+}

@@ -10,7 +10,7 @@
   },
   "main": "./lib/index.js",
   "scripts": {
-    "doc": "jsdoc -c jsdoc.json",
+    "doc": "docma -c docma.config.json",
     "lint": "eslint .",
     "nsp": "nsp check",
     "prepush": "npm run nsp & npm test",
@@ -26,10 +26,9 @@
   },
   "devDependencies": {
     "coveralls": "~3.0.0",
-    "docdash": "~0.4.0",
+    "docma": "~1.5.3",
     "eslint": "~4.16.0",
     "husky": "~0.14.3",
-    "jsdoc": "~3.5.5",
     "lab": "~15.2.0",
     "lab-espower-transformer": "~2.0.0",
     "next-update": "~3.6.0",
