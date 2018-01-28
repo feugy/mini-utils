@@ -1,10 +1,11 @@
+# Minimalist µServices
+
 [![NPM Version][npm-badge]][npm-url]
-[![Dependencies][david-badge]][david-url]
 [![NSP Status][nsp-badge]][nsp-url]
+[![Dependencies][david-badge]][david-url]
 [![Build][travis-badge]][travis-url]
 [![Test Coverage][coveralls-badge]][coveralls-url]
-
-# Minimalist µServices
+[![License: MIT][license-badge]][license-url]
 
 The goal of [mini-service][mini-service-url] is to give the minimal structure to implement a µService, that can be invoked locally or remotely.
 [Mini-client][mini-client-url] is a generic client that [limits coupling][distributed-monolith] between your project and a remote mini-service.
@@ -42,3 +43,5 @@ Copyright [Damien Simonin Feugas][feugy] and other contributors, licensed under 
 [nsp-url]: https://nodesecurity.io/orgs/perso/projects/6bc9b474-6f9e-4db0-a4d3-c3bf5443a63a
 [distributed-monolith]: https://www.infoq.com/news/2016/02/services-distributed-monolith
 [api-reference]: https://feugy.github.io/mini-utils/
+[license-badge]: https://img.shields.io/badge/License-MIT-green.svg
+[license-url]: https://github.com/feugy/mini-utils/blob/master/LICENSE
