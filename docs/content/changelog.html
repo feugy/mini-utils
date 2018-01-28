@@ -1,0 +1,34 @@
+
+<html><head></head><body><h1 id="changelog">Changelog</h1>
+<hr />
+<h2 id="2-4-0">2.4.0</h2>
+<ul>
+<li><em>[Deprecation]</em> <code>validateParams()</code> will be deprecated in next major version, in favour of: <code>enrichError()</code>
+ Validation of input parameters and returned result is now responsability of mini-client &amp; mini-service.
+ <code>enrichError()</code> ensures that Joi <code>ValidationError</code>, when thrown, get enriched and turned into consistent
+ Boom errors</li>
+<li>Dependencies update</li>
+</ul>
+<h2 id="2-3-0">2.3.0</h2>
+<ul>
+<li>Expose CRC32 checksum header name</li>
+<li>Dependencies update</li>
+</ul>
+<h2 id="2-2-1">2.2.1</h2>
+<ul>
+<li>Add extractValidate that allow validation objects in options</li>
+<li>Include API name in validation errors</li>
+<li>Better documentation</li>
+</ul>
+<h2 id="2-0-0">2.0.0</h2>
+<ul>
+<li>Rename service to group</li>
+<li>Introduce extractGroup()</li>
+<li>Upgrade all deps to latests</li>
+<li>Use husky instead of ghooks</li>
+</ul>
+<h2 id="1-0-0">1.0.0</h2>
+<ul>
+<li>initial release</li>
+</ul>
+</body></html>
