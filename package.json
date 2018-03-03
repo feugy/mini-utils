@@ -1,6 +1,6 @@
 {
   "name": "mini-service-utils",
-  "version": "2.4.0",
+  "version": "3.0.0",
   "description": "Shared utilities mini-* libraries: Micro services done simply",
   "author": "feugy <damien.feugas@gmail.com>",
   "license": "MIT",
@@ -20,6 +20,7 @@
     "watch-doc": "watch \"npm run doc\" ./lib"
   },
   "dependencies": {
+    "acorn": "~5.5.0",
     "boom": "~7.1.1",
     "bunyan": "~2.0.2",
     "joi": "~13.1.1"
@@ -28,6 +29,11 @@
     "coveralls": "~3.0.0",
     "docma": "~1.5.3",
     "eslint": "~4.16.0",
+    "eslint-config-standard": "~10.2.1",
+    "eslint-plugin-import": "~2.8.0",
+    "eslint-plugin-node": "~5.2.1",
+    "eslint-plugin-promise": "~3.6.0",
+    "eslint-plugin-standard": "~3.0.1",
     "husky": "~0.14.3",
     "lab": "~15.2.0",
     "lab-espower-transformer": "~2.0.0",

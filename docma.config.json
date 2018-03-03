@@ -5,7 +5,7 @@
   ],
   "dest": "./docs",
   "jsdoc": {
-    "allowUnknownTags": false,
+    "allowUnknownTags": true,
     "hierarchy": true,
     "recurse": true,
     "sort": "grouped"
@@ -17,9 +17,9 @@
   },
   "template": {
     "path": "default",
-    "outline": "flat",
     "options": {
       "title": "mini-service-utils",
+      "outline": "tree",
       "navItems": [{
         "iconClass": "ico-location",
         "label": "Welcome",

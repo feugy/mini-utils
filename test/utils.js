@@ -9,12 +9,10 @@ const lab = exports.lab = Lab.script()
 const {describe, it, beforeEach} = lab
 
 describe('Utilities', () => {
-
   /* eslint no-empty-function: 0 */
   const noop = () => {}
 
   describe('extractValidate', () => {
-
     it('should extract from api.validate', () => {
       const id = 'test'
       const apis = {
@@ -74,7 +72,6 @@ describe('Utilities', () => {
   })
 
   describe('getLogger', () => {
-
     beforeEach(() => {
       utils.__set__('logger', null)
     })
@@ -99,7 +96,6 @@ describe('Utilities', () => {
   })
 
   describe('arrayToObj', () => {
-
     it('should transform an array to an object', () => {
       assert.deepStrictEqual(utils.arrayToObj([1, 2], ['count', 'other']), {count: 1, other: 2})
     })
@@ -115,7 +111,6 @@ describe('Utilities', () => {
   })
 
   describe('isApi', () => {
-
     it('should allow empty object', () => {
       assert(utils.isApi({}))
     })
@@ -126,7 +121,7 @@ describe('Utilities', () => {
 
     it('should allow class instances', () => {
       class Service {
-        method() {}
+        method () {}
       }
       assert(utils.isApi(new Service()))
     })
@@ -150,29 +145,7 @@ describe('Utilities', () => {
     })
   })
 
-  describe('validateParams - soon deprecated', () => {
-
-    it('should fails when giving more parameters than expexted', () => {
-      const error = utils.validateParams({count: 1, other: 2}, Joi.object(), 'test', 1)
-      assert(error)
-      assert.equal(error.message, 'API test must contain at most 1 parameters')
-    })
-
-    it('should report validation errors', () => {
-      const error = utils.validateParams({count: 1}, Joi.object({other: Joi.string().required()}), 'test', 1)
-      assert(error)
-      assert(error.message.includes('API test'))
-      assert(error.message.includes('"other" is required]'))
-    })
-
-    it('should allow valid invokations', () => {
-      const error = utils.validateParams({count: 1}, Joi.object({count: Joi.number().required()}), 'test', 1)
-      assert.strictEqual(error, null)
-    })
-  })
-
   describe('enrichError', () => {
-
     const validationError = Joi.object({other: Joi.string().required()}).validate({count: 1}).error
 
     it('should return null if no error', () => {
@@ -208,7 +181,6 @@ describe('Utilities', () => {
   })
 
   describe('getParamNames', () => {
-
     it('should fails on null', () => {
       assert.throws(() => utils.getParamNames(null), /unsupported function null/)
     })
@@ -221,137 +193,320 @@ describe('Utilities', () => {
       assert.throws(() => utils.getParamNames({}), /unsupported function \[object Object\]/)
     })
 
-    it('should fails on rest parameter', () => {
-      assert.throws(() => utils.getParamNames((...args) => {}), /unsupported function \(\.\.\.args\)/)
-    })
-
-    it('should handle typical function', () => {
-      const obj = {
-        ping() {
-          return Promise.resolve({time: new Date()})
+    const suites = [{
+      name: 'without parameter',
+      expected: [],
+      tests: [{
+        name: 'function declaration',
+        code: () => {
+          function declared () {}
+          return declared
         }
-      }
-      assert.deepStrictEqual(utils.getParamNames(obj.ping), [])
-    })
+      }, {
+        name: 'async function declaration',
+        code: () => {
+          async function declared () {}
+          return declared
+        }
+      }, {
+        name: 'anonymous function',
+        code: () => function () {}
+      }, {
+        name: 'async anonymous function',
+        code: () => async function () {}
+      }, {
+        name: 'named function',
+        code: () => function named () {}
+      }, {
+        name: 'async named function',
+        code: () => async function named () {}
+      }, {
+        name: 'function shortcut',
+        code: () => {
+          const obj = {
+            named () {}
+          }
+          return obj.named
+        }
+      }, {
+        name: 'async function shortcut',
+        code: () => {
+          const obj = {
+            async named () {}
+          }
+          return obj.named
+        }
+      }, {
+        name: 'arrow function',
+        code: () => () => {}
+      }, {
+        name: 'async arrow function',
+        code: () => async () => {}
+      }]
+    }, {
+      name: 'with single parameter',
+      expected: ['a'],
+      tests: [{
+        name: 'function declaration',
+        code: () => {
+          function declared (a) {}
+          return declared
+        }
+      }, {
+        name: 'async function declaration',
+        code: () => {
+          async function declared (a) {}
+          return declared
+        }
+      }, {
+        name: 'anonymous function',
+        code: () => function (a) {}
+      }, {
+        name: 'async anonymous function',
+        code: () => async function (a) {}
+      }, {
+        name: 'named function',
+        code: () => function named (a) {}
+      }, {
+        name: 'async named function',
+        code: () => async function named (a) {}
+      }, {
+        name: 'function shortcut',
+        code: () => {
+          const obj = {
+            named (a) {}
+          }
+          return obj.named
+        }
+      }, {
+        name: 'async function shortcut',
+        code: () => {
+          const obj = {
+            async named (a) {}
+          }
+          return obj.named
+        }
+      }, {
+        name: 'arrow function',
+        code: () => a => {}
+      }, {
+        name: 'async arrow function',
+        code: () => async a => {}
+      }]
+    }, {
+      name: 'with multiple parameters',
+      expected: ['a', 'b', 'c'],
+      tests: [{
+        name: 'function declaration',
+        code: () => {
+          function declared (a, b, c) {}
+          return declared
+        }
+      }, {
+        name: 'async function declaration',
+        code: () => {
+          async function declared (a, b, c) {}
+          return declared
+        }
+      }, {
+        name: 'anonymous function',
+        code: () => function (a, b, c) {}
+      }, {
+        name: 'async anonymous function',
+        code: () => async function (a, b, c) {}
+      }, {
+        name: 'named function',
+        code: () => function named (a, b, c) {}
+      }, {
+        name: 'async named function',
+        code: () => async function named (a, b, c) {}
+      }, {
+        name: 'function shortcut',
+        code: () => {
+          const obj = {
+            named (a, b, c) {}
+          }
+          return obj.named
+        }
+      }, {
+        name: 'async function shortcut',
+        code: () => {
+          const obj = {
+            async named (a, b, c) {}
+          }
+          return obj.named
+        }
+      }, {
+        name: 'arrow function',
+        code: () => (a, b, c) => {}
+      }, {
+        name: 'async arrow function',
+        code: () => async (a, b, c) => {}
+      }]
+    }, {
+      name: 'with default values',
+      expected: ['a', 'b', 'c'],
+      tests: [{
+        name: 'function declaration',
+        code: () => {
+          function declared (a, b, c = null) {}
+          return declared
+        }
+      }, {
+        name: 'async function declaration',
+        code: () => {
+          async function declared (a, b, c = 10) {}
+          return declared
+        }
+      }, {
+        name: 'anonymous function',
+        code: () => function (a, b, c = '') {}
+      }, {
+        name: 'async anonymous function',
+        code: () => async function (a, b, c = []) {}
+      }, {
+        name: 'named function',
+        code: () => function named (a, b, c = true) {}
+      }, {
+        name: 'async named function',
+        code: () => async function named (a, b, c = false) {}
+      }, {
+        name: 'function shortcut',
+        code: () => {
+          const obj = {
+            named (a, b, c = {}) {}
+          }
+          return obj.named
+        }
+      }, {
+        name: 'async function shortcut',
+        code: () => {
+          const obj = {
+            async named (a, b, c = () => {}) {}
+          }
+          return obj.named
+        }
+      }, {
+        name: 'arrow function',
+        code: () => (a, b, c = describe) => {}
+      }, {
+        name: 'async arrow function',
+        code: () => async (a, b, c = null) => {}
+      }]
+    }, {
+      name: 'with rest parameters',
+      expected: ['a', 'b', 'rest'],
+      tests: [{
+        name: 'function declaration',
+        code: () => {
+          function declared (a, b, ...rest) {}
+          return declared
+        }
+      }, {
+        name: 'async function declaration',
+        code: () => {
+          async function declared (a, b, ...rest) {}
+          return declared
+        }
+      }, {
+        name: 'anonymous function',
+        code: () => function (a, b, ...rest) {}
+      }, {
+        name: 'async anonymous function',
+        code: () => async function (a, b, ...rest) {}
+      }, {
+        name: 'named function',
+        code: () => function named (a, b, ...rest) {}
+      }, {
+        name: 'async named function',
+        code: () => async function named (a, b, ...rest) {}
+      }, {
+        name: 'function shortcut',
+        code: () => {
+          const obj = {
+            named (a, b, ...rest) {}
+          }
+          return obj.named
+        }
+      }, {
+        name: 'async function shortcut',
+        code: () => {
+          const obj = {
+            async named (a, b, ...rest) {}
+          }
+          return obj.named
+        }
+      }, {
+        name: 'arrow function',
+        code: () => (a, b, ...rest) => {}
+      }, {
+        name: 'async arrow function',
+        code: () => async (a, b, ...rest) => {}
+      }]
+    }, {
+      name: 'with destructured parameters',
+      expected: ['a', 'param2', 'c'],
+      tests: [{
+        name: 'function declaration',
+        code: () => {
+          function declared (a, {b: [d]}, c) {}
+          return declared
+        }
+      }, {
+        name: 'async function declaration',
+        code: () => {
+          async function declared (a, {b: {d}}, c) {}
+          return declared
+        }
+      }, {
+        name: 'anonymous function',
+        code: () => function (a, {b, d}, c) {}
+      }, {
+        name: 'async anonymous function',
+        code: () => async function (a, [b], c) {}
+      }, {
+        name: 'named function',
+        code: () => function named (a, {b}, c) {}
+      }, {
+        name: 'async named function',
+        code: () => async function named (a, {b}, c) {}
+      }, {
+        name: 'function shortcut',
+        code: () => {
+          const obj = {
+            named (a, [b, ...rest], c) {}
+          }
+          return obj.named
+        }
+      }, {
+        name: 'async function shortcut',
+        code: () => {
+          const obj = {
+            async named (a, {b}, c) {}
+          }
+          return obj.named
+        }
+      }, {
+        name: 'arrow function',
+        code: () => (a, {b}, c) => {}
+      }, {
+        name: 'async arrow function',
+        code: () => async (a, {b}, c) => {}
+      }]
+    }]
 
-    it('should handle empty function declaration', () => {
-      /* eslint prefer-arrow-callback: 0 */
-      function declared() {
-        noop()
-      }
-      assert.deepStrictEqual(utils.getParamNames(declared), [])
-    })
-
-    it('should handle empty anonymous function', () => {
-      /* eslint prefer-arrow-callback: 0 */
-      assert.deepStrictEqual(utils.getParamNames(function() {
-        noop()
-      }), [])
-    })
-
-    it('should handle named function', () => {
-      /* eslint prefer-arrow-callback: 0 */
-      assert.deepStrictEqual(utils.getParamNames(function named() {
-        noop()
-      }), [])
-    })
-
-    it('should handle empty arrow function', () => {
-      assert.deepStrictEqual(utils.getParamNames(() => {
-        noop()
-      }), [])
-    })
-
-    it('should handle function declaration with single parameter', () => {
-      /* eslint prefer-arrow-callback: 0 */
-      function declared(a) {
-        noop()
-      }
-      assert.deepStrictEqual(utils.getParamNames(declared), ['a'])
-    })
-
-    it('should handle anonymous function with single parameter', () => {
-      /* eslint prefer-arrow-callback: 0,  no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(function(a) {
-        noop()
-      }), ['a'])
-    })
-
-    it('should handle named function with single parameter', () => {
-      /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(function named(a) {
-        noop()
-      }), ['a'])
-    })
-
-    it('should handle empty arrow function with single parameter', () => {
-      /* eslint no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(a => {
-        noop()
-      }), ['a'])
-    })
-
-    it('should handle function declaration with multiple parameter', () => {
-      /* eslint prefer-arrow-callback: 0 */
-      function declared(a, b, c) {
-        noop()
-      }
-      assert.deepStrictEqual(utils.getParamNames(declared), ['a', 'b', 'c'])
-    })
-
-    it('should handle anonymous function with multiple parameters', () => {
-      /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(function(a, b, c) {
-        noop()
-      }), ['a', 'b', 'c'])
-    })
-
-    it('should handle named function with multiple parameters', () => {
-      /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(function named(a, b, c) {
-        noop()
-      }), ['a', 'b', 'c'])
-    })
-
-    it('should handle empty arrow function with multiple parameters', () => {
-      /* eslint no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames((a, b, c) => {
-        noop()
-      }), ['a', 'b', 'c'])
-    })
-
-    it('should handle function declaration with default values', () => {
-      /* eslint prefer-arrow-callback: 0 */
-      function declared(a, b, c = false) {
-        noop()
-      }
-      assert.deepStrictEqual(utils.getParamNames(declared), ['a', 'b', 'c'])
-    })
-
-    it('should handle anonymous function with default values', () => {
-      /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(function(a, b, c = 10) {
-        noop()
-      }), ['a', 'b', 'c'])
-    })
-
-    it('should handle named function with default values', () => {
-      /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(function named(a, b, c = null) {
-        noop()
-      }), ['a', 'b', 'c'])
-    })
-
-    it('should handle empty arrow function with default values', () => {
-      /* eslint no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames((a, b, c = []) => {
-        noop()
-      }), ['a', 'b', 'c'])
+    suites.forEach(({name, expected, tests}) => {
+      describe(name, () => {
+        tests.forEach(({name, code}) => {
+          it(`should handle ${name}`, () => {
+            assert.deepStrictEqual(utils.getParamNames(code()), expected)
+          })
+        })
+      })
     })
   })
 
   describe('extractGroups', () => {
-
     it('should get group from parameters', () => {
       const name = 'test'
       const init = noop
@@ -367,9 +522,9 @@ describe('Utilities', () => {
       const name2 = 'test2'
       const init2 = noop
       assert.deepStrictEqual(utils.extractGroups({
-        groups: [{name: name1, init: init1}, {name: name1, init: init1}]
+        groups: [{name: name1, init: init1}, {name: name2, init: init2}]
       }), {
-        groups: [{name: name1, init: init1}, {name: name1, init: init1}],
+        groups: [{name: name1, init: init1}, {name: name2, init: init2}],
         groupOpts: {}
       })
     })
@@ -383,7 +538,7 @@ describe('Utilities', () => {
         groups: [{name: name1, init: init1}, {name: name1, init: init1}],
         groupOpts: {[name1]: {name: name1}, [name2]: {name: name2}}
       }), {
-        groups: [{name: name1, init: init1}, {name: name1, init: init1}],
+        groups: [{name: name1, init: init1}, {name: name1, init: init2}],
         groupOpts: {[name1]: {name: name1}, [name2]: {name: name2}}
       })
     })

@@ -1,6 +1,19 @@
 
 <html><head></head><body><h1 id="changelog">Changelog</h1>
 <hr />
+<h2 id="3-0-0">3.0.0</h2>
+<ul>
+<li><strong>[Breaking change]</strong> <code>getParamNames()</code> supports rest parameters:<pre><code class="lang-js"> getParamNames((a, b, ...rest) =&gt; {}) === ['a', 'b', 'rest']
+</code></pre>
+ It used to throw an Error</li>
+<li><strong>[Breaking change]</strong> <code>getParamNames()</code> supports destructured parameters:<pre><code class="lang-js"> getParamNames((a, {b: [c]}, [d, e], f) =&gt; {}) === ['a', 'param1', 'param2', 'f']
+</code></pre>
+ It used to throw an Error</li>
+<li><strong>[Breaking change]</strong> Removed: <code>validateParams()</code> deprecated function</li>
+<li>Fixed: <code>getParamNames()</code> supports async functions with single parameter shortcut: `<pre><code class="lang-js"> getParamNames(async a =&gt; {}) === ['a']
+</code></pre>
+</li>
+</ul>
 <h2 id="2-4-0">2.4.0</h2>
 <ul>
 <li><em>[Deprecation]</em> <code>validateParams()</code> will be deprecated in next major version, in favour of: <code>enrichError()</code>
