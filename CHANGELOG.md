@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.1
+- Fix `getParamNames()` to support destructured parameters with default values
+
 ## 3.0.0
 - **[Breaking change]** `getParamNames()` supports rest parameters:
    ```js
