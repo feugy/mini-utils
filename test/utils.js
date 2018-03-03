@@ -9,12 +9,10 @@ const lab = exports.lab = Lab.script()
 const {describe, it, beforeEach} = lab
 
 describe('Utilities', () => {
-
   /* eslint no-empty-function: 0 */
   const noop = () => {}
 
   describe('extractValidate', () => {
-
     it('should extract from api.validate', () => {
       const id = 'test'
       const apis = {
@@ -74,7 +72,6 @@ describe('Utilities', () => {
   })
 
   describe('getLogger', () => {
-
     beforeEach(() => {
       utils.__set__('logger', null)
     })
@@ -99,7 +96,6 @@ describe('Utilities', () => {
   })
 
   describe('arrayToObj', () => {
-
     it('should transform an array to an object', () => {
       assert.deepStrictEqual(utils.arrayToObj([1, 2], ['count', 'other']), {count: 1, other: 2})
     })
@@ -115,7 +111,6 @@ describe('Utilities', () => {
   })
 
   describe('isApi', () => {
-
     it('should allow empty object', () => {
       assert(utils.isApi({}))
     })
@@ -126,7 +121,7 @@ describe('Utilities', () => {
 
     it('should allow class instances', () => {
       class Service {
-        method() {}
+        method () {}
       }
       assert(utils.isApi(new Service()))
     })
@@ -151,7 +146,6 @@ describe('Utilities', () => {
   })
 
   describe('validateParams - soon deprecated', () => {
-
     it('should fails when giving more parameters than expexted', () => {
       const error = utils.validateParams({count: 1, other: 2}, Joi.object(), 'test', 1)
       assert(error)
@@ -172,7 +166,6 @@ describe('Utilities', () => {
   })
 
   describe('enrichError', () => {
-
     const validationError = Joi.object({other: Joi.string().required()}).validate({count: 1}).error
 
     it('should return null if no error', () => {
@@ -208,7 +201,6 @@ describe('Utilities', () => {
   })
 
   describe('getParamNames', () => {
-
     it('should fails on null', () => {
       assert.throws(() => utils.getParamNames(null), /unsupported function null/)
     })
@@ -225,46 +217,44 @@ describe('Utilities', () => {
       assert.throws(() => utils.getParamNames((...args) => {}), /unsupported function \(\.\.\.args\)/)
     })
 
-    it('should handle typical function', () => {
-      const obj = {
-        ping() {
-          return Promise.resolve({time: new Date()})
-        }
-      }
-      assert.deepStrictEqual(utils.getParamNames(obj.ping), [])
-    })
-
-    it('should handle empty function declaration', () => {
+    it('should handle function declaration', () => {
       /* eslint prefer-arrow-callback: 0 */
-      function declared() {
+      function declared () {
         noop()
       }
       assert.deepStrictEqual(utils.getParamNames(declared), [])
     })
 
-    it('should handle empty anonymous function', () => {
+    it('should handle anonymous function', () => {
       /* eslint prefer-arrow-callback: 0 */
-      assert.deepStrictEqual(utils.getParamNames(function() {
+      assert.deepStrictEqual(utils.getParamNames(function () {
         noop()
       }), [])
     })
 
     it('should handle named function', () => {
       /* eslint prefer-arrow-callback: 0 */
-      assert.deepStrictEqual(utils.getParamNames(function named() {
+      assert.deepStrictEqual(utils.getParamNames(function named () {
         noop()
       }), [])
     })
 
-    it('should handle empty arrow function', () => {
+    it('should handle arrow function', () => {
       assert.deepStrictEqual(utils.getParamNames(() => {
         noop()
       }), [])
     })
 
+    it('should handle function shortcut', () => {
+      const obj = {
+        ping () {}
+      }
+      assert.deepStrictEqual(utils.getParamNames(obj.ping), [])
+    })
+
     it('should handle function declaration with single parameter', () => {
       /* eslint prefer-arrow-callback: 0 */
-      function declared(a) {
+      function declared (a) {
         noop()
       }
       assert.deepStrictEqual(utils.getParamNames(declared), ['a'])
@@ -272,28 +262,41 @@ describe('Utilities', () => {
 
     it('should handle anonymous function with single parameter', () => {
       /* eslint prefer-arrow-callback: 0,  no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(function(a) {
+      assert.deepStrictEqual(utils.getParamNames(function (a) {
         noop()
       }), ['a'])
     })
 
     it('should handle named function with single parameter', () => {
       /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(function named(a) {
+      assert.deepStrictEqual(utils.getParamNames(function named (a) {
         noop()
       }), ['a'])
     })
 
-    it('should handle empty arrow function with single parameter', () => {
+    it('should handle arrow function with single parameter', () => {
       /* eslint no-unused-vars:0 */
       assert.deepStrictEqual(utils.getParamNames(a => {
         noop()
       }), ['a'])
     })
 
+    it('should handle async arrow function with single parameter', () => {
+      assert.deepStrictEqual(utils.getParamNames(async a => {
+        noop()
+      }), ['a'])
+    })
+
+    it('should handle function shortcut with single parameter', () => {
+      const obj = {
+        ping (a) {}
+      }
+      assert.deepStrictEqual(utils.getParamNames(obj.ping), ['a'])
+    })
+
     it('should handle function declaration with multiple parameter', () => {
       /* eslint prefer-arrow-callback: 0 */
-      function declared(a, b, c) {
+      function declared (a, b, c) {
         noop()
       }
       assert.deepStrictEqual(utils.getParamNames(declared), ['a', 'b', 'c'])
@@ -301,28 +304,35 @@ describe('Utilities', () => {
 
     it('should handle anonymous function with multiple parameters', () => {
       /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(function(a, b, c) {
+      assert.deepStrictEqual(utils.getParamNames(function (a, b, c) {
         noop()
       }), ['a', 'b', 'c'])
     })
 
     it('should handle named function with multiple parameters', () => {
       /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(function named(a, b, c) {
+      assert.deepStrictEqual(utils.getParamNames(function named (a, b, c) {
         noop()
       }), ['a', 'b', 'c'])
     })
 
-    it('should handle empty arrow function with multiple parameters', () => {
+    it('should handle arrow function with multiple parameters', () => {
       /* eslint no-unused-vars:0 */
       assert.deepStrictEqual(utils.getParamNames((a, b, c) => {
         noop()
       }), ['a', 'b', 'c'])
     })
 
+    it('should handle function shortcut with multiple parameters', () => {
+      const obj = {
+        ping (a, b, c) {}
+      }
+      assert.deepStrictEqual(utils.getParamNames(obj.ping), ['a', 'b', 'c'])
+    })
+
     it('should handle function declaration with default values', () => {
       /* eslint prefer-arrow-callback: 0 */
-      function declared(a, b, c = false) {
+      function declared (a, b, c = false) {
         noop()
       }
       assert.deepStrictEqual(utils.getParamNames(declared), ['a', 'b', 'c'])
@@ -330,28 +340,66 @@ describe('Utilities', () => {
 
     it('should handle anonymous function with default values', () => {
       /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(function(a, b, c = 10) {
+      assert.deepStrictEqual(utils.getParamNames(function (a, b, c = 10) {
         noop()
       }), ['a', 'b', 'c'])
     })
 
     it('should handle named function with default values', () => {
       /* eslint prefer-arrow-callback: 0, no-unused-vars:0 */
-      assert.deepStrictEqual(utils.getParamNames(function named(a, b, c = null) {
+      assert.deepStrictEqual(utils.getParamNames(function named (a, b, c = null) {
         noop()
       }), ['a', 'b', 'c'])
     })
 
-    it('should handle empty arrow function with default values', () => {
+    it('should handle arrow function with default values', () => {
       /* eslint no-unused-vars:0 */
       assert.deepStrictEqual(utils.getParamNames((a, b, c = []) => {
         noop()
       }), ['a', 'b', 'c'])
     })
+
+    it('should handle function shortcut with default values', () => {
+      const obj = {
+        ping (a, b, c = 'yeah') {}
+      }
+      assert.deepStrictEqual(utils.getParamNames(obj.ping), ['a', 'b', 'c'])
+    })
+
+    it('should handle async function declaration', () => {
+      async function declared (a, b, c) {
+        noop()
+      }
+      assert.deepStrictEqual(utils.getParamNames(declared), ['a', 'b', 'c'])
+    })
+
+    it('should handle async anonymous function', () => {
+      assert.deepStrictEqual(utils.getParamNames(async function (a, b, c) {
+        noop()
+      }), ['a', 'b', 'c'])
+    })
+
+    it('should handle async named function', () => {
+      assert.deepStrictEqual(utils.getParamNames(async function named (a, b, c) {
+        noop()
+      }), ['a', 'b', 'c'])
+    })
+
+    it('should handle async arrow function', () => {
+      assert.deepStrictEqual(utils.getParamNames(async (a, b, c) => {
+        noop()
+      }), ['a', 'b', 'c'])
+    })
+
+    it('should handle async function shortcut', () => {
+      const obj = {
+        async ping (a, b, c) {}
+      }
+      assert.deepStrictEqual(utils.getParamNames(obj.ping), ['a', 'b', 'c'])
+    })
   })
 
   describe('extractGroups', () => {
-
     it('should get group from parameters', () => {
       const name = 'test'
       const init = noop
