@@ -482,13 +482,13 @@ describe('Utilities', () => {
         name: 'async function shortcut',
         code: () => {
           const obj = {
-            async named (a, {b}, c) {}
+            async named (a, {b} = {}, c) {}
           }
           return obj.named
         }
       }, {
         name: 'arrow function',
-        code: () => (a, {b}, c) => {}
+        code: () => (a, [b] = [], c) => {}
       }, {
         name: 'async arrow function',
         code: () => async (a, {b}, c) => {}
