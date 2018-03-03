@@ -1,6 +1,6 @@
 {
   "name": "mini-service-utils",
-  "version": "2.4.0",
+  "version": "3.0.0",
   "description": "Shared utilities mini-* libraries: Micro services done simply",
   "author": "feugy <damien.feugas@gmail.com>",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "watch-doc": "watch \"npm run doc\" ./lib"
   },
   "dependencies": {
-    "acorn": "5.5.0",
+    "acorn": "~5.5.0",
     "boom": "~7.1.1",
     "bunyan": "~2.0.2",
     "joi": "~13.1.1"
