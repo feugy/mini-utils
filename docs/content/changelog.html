@@ -1,46 +1,84 @@
 
 <html><head></head><body><h1 id="changelog">Changelog</h1>
 <hr />
-<h2 id="3-0-0">3.0.0</h2>
+<h2 id="unreleased">Unreleased</h2>
+<hr />
+<h4 id="changed">Changed</h4>
 <ul>
-<li><strong>[Breaking change]</strong> <code>getParamNames()</code> supports rest parameters:<pre><code class="lang-js"> getParamNames((a, b, ...rest) =&gt; {}) === ['a', 'b', 'rest']
-</code></pre>
- It used to throw an Error</li>
-<li><strong>[Breaking change]</strong> <code>getParamNames()</code> supports destructured parameters:<pre><code class="lang-js"> getParamNames((a, {b: [c]}, [d, e], f) =&gt; {}) === ['a', 'param1', 'param2', 'f']
-</code></pre>
- It used to throw an Error</li>
-<li><strong>[Breaking change]</strong> Removed: <code>validateParams()</code> deprecated function</li>
-<li>Fixed: <code>getParamNames()</code> supports async functions with single parameter shortcut: `<pre><code class="lang-js"> getParamNames(async a =&gt; {}) === ['a']
+<li>Reformat CHANGELOG to follow <a href="https://keepachangelog.com">Keep a Changelog</a> recommandations</li>
+<li>New documentation with latest docma v2.0.0</li>
+<li>Dependencies update</li>
+</ul>
+<h2 id="301">3.0.1</h2>
+<hr />
+<h4 id="fixed">Fixed</h4>
+<ul>
+<li><code>getParamNames()</code> to support destructured parameters with default values</li>
+</ul>
+<h2 id="300">3.0.0</h2>
+<hr />
+<h4 id="fixed">Fixed</h4>
+<ul>
+<li><code>getParamNames()</code> supports async functions with single parameter shortcut: `<pre><code class="lang-js"> getParamNames(async a =&gt; {}) === ['a']
 </code></pre>
 </li>
 </ul>
-<h2 id="2-4-0">2.4.0</h2>
+<h4 id="changed">Changed</h4>
 <ul>
-<li><em>[Deprecation]</em> <code>validateParams()</code> will be deprecated in next major version, in favour of: <code>enrichError()</code>
+<li><strong>Breaking</strong>: <code>getParamNames()</code> supports rest parameters:<pre><code class="lang-js"> getParamNames((a, b, ...rest) =&gt; {}) === ['a', 'b', 'rest']
+</code></pre>
+ It used to throw an Error</li>
+<li><strong>Breaking</strong>: <code>getParamNames()</code> supports destructured parameters:<pre><code class="lang-js"> getParamNames((a, {b: [c]}, [d, e], f) =&gt; {}) === ['a', 'param1', 'param2', 'f']
+</code></pre>
+ It used to throw an Error</li>
+<li><strong>Breaking</strong>: Removed: <code>validateParams()</code> deprecated function</li>
+</ul>
+<h2 id="240">2.4.0</h2>
+<hr />
+<h4 id="changed">Changed</h4>
+<ul>
+<li><strong>Deprecation</strong>: <code>validateParams()</code> will be deprecated in next major version, in favour of: <code>enrichError()</code>
  Validation of input parameters and returned result is now responsability of mini-client &amp; mini-service.
  <code>enrichError()</code> ensures that Joi <code>ValidationError</code>, when thrown, get enriched and turned into consistent
  Boom errors</li>
 <li>Dependencies update</li>
 </ul>
-<h2 id="2-3-0">2.3.0</h2>
+<h2 id="230">2.3.0</h2>
+<hr />
+<h3 id="added">Added</h3>
 <ul>
 <li>Expose CRC32 checksum header name</li>
+</ul>
+<h4 id="changed">Changed</h4>
+<ul>
 <li>Dependencies update</li>
 </ul>
-<h2 id="2-2-1">2.2.1</h2>
+<h2 id="221">2.2.1</h2>
+<hr />
+<h3 id="added">Added</h3>
 <ul>
-<li>Add extractValidate that allow validation objects in options</li>
+<li><code>extractValidate()</code> function allowing validation objects in options</li>
 <li>Include API name in validation errors</li>
+</ul>
+<h4 id="changed">Changed</h4>
+<ul>
 <li>Better documentation</li>
 </ul>
-<h2 id="2-0-0">2.0.0</h2>
+<h2 id="200">2.0.0</h2>
+<hr />
+<h3 id="added">Added</h3>
 <ul>
-<li>Rename service to group</li>
-<li>Introduce extractGroup()</li>
-<li>Upgrade all deps to latests</li>
-<li>Use husky instead of ghooks</li>
+<li>Introduce <code>extractGroup()</code></li>
 </ul>
-<h2 id="1-0-0">1.0.0</h2>
+<h4 id="changed">Changed</h4>
+<ul>
+<li><strong>Breaking</strong>: Rename service to group</li>
+<li>Use husky instead of ghooks</li>
+<li>Dependencies update</li>
+</ul>
+<h2 id="100">1.0.0</h2>
+<hr />
+<h3 id="added">Added</h3>
 <ul>
 <li>initial release</li>
 </ul>
