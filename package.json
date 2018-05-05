@@ -10,14 +10,15 @@
   },
   "main": "./lib/index.js",
   "scripts": {
-    "doc": "docma -c docma.config.json",
+    "doc": "docma",
+    "doc:serve": "docma serve",
+    "doc:watch": "chokidar . -c \"npm run doc\" -i .git -i coverage -i docs -i node_modules & npm run doc:serve",
     "lint": "eslint .",
     "nsp": "nsp check",
     "prepush": "npm run nsp & npm test",
     "submit-coverage": "cat coverage/lcov.info | coveralls -v",
     "test": "lab test",
-    "update-deps": "next-update -k true",
-    "watch-doc": "watch \"npm run doc\" ./lib"
+    "update-deps": "next-update -k true"
   },
   "dependencies": {
     "acorn": "~5.5.0",
@@ -27,7 +28,8 @@
   },
   "devDependencies": {
     "coveralls": "~3.0.0",
-    "docma": "~1.5.3",
+    "chokidar-cli": "~1.2.0",
+    "docma": "~2.1.0",
     "eslint": "~4.16.0",
     "eslint-config-standard": "~10.2.1",
     "eslint-plugin-import": "~2.8.0",
@@ -40,7 +42,6 @@
     "next-update": "~3.6.0",
     "nsp": "~2.8.1",
     "power-assert": "~1.4.4",
-    "rewire": "~3.0.2",
-    "watch": "~1.0.2"
+    "rewire": "~3.0.2"
   }
 }

@@ -1,46 +1,72 @@
 # Changelog
 
+## Unreleased
+#### Changed
+- Reformat CHANGELOG to follow [Keep a Changelog](https://keepachangelog.com) recommandations
+- New documentation with latest docma v2.0.0
+- Dependencies update
+
 ## 3.0.1
-- Fix `getParamNames()` to support destructured parameters with default values
+#### Fixed
+- `getParamNames()` to support destructured parameters with default values
 
 ## 3.0.0
-- **[Breaking change]** `getParamNames()` supports rest parameters:
-   ```js
-   getParamNames((a, b, ...rest) => {}) === ['a', 'b', 'rest']
-   ```
-   It used to throw an Error
-- **[Breaking change]** `getParamNames()` supports destructured parameters:
-   ```js
-   getParamNames((a, {b: [c]}, [d, e], f) => {}) === ['a', 'param1', 'param2', 'f']
-   ```
-   It used to throw an Error
-- **[Breaking change]** Removed: `validateParams()` deprecated function
-- Fixed: `getParamNames()` supports async functions with single parameter shortcut: `
+#### Fixed
+- `getParamNames()` supports async functions with single parameter shortcut: `
    ```js
    getParamNames(async a => {}) === ['a']
    ```
 
+#### Changed
+- **Breaking**: `getParamNames()` supports rest parameters:
+   ```js
+   getParamNames((a, b, ...rest) => {}) === ['a', 'b', 'rest']
+   ```
+   It used to throw an Error
+- **Breaking**: `getParamNames()` supports destructured parameters:
+   ```js
+   getParamNames((a, {b: [c]}, [d, e], f) => {}) === ['a', 'param1', 'param2', 'f']
+   ```
+   It used to throw an Error
+- **Breaking**: Removed: `validateParams()` deprecated function
+
+
 ## 2.4.0
-- *[Deprecation]* `validateParams()` will be deprecated in next major version, in favour of: `enrichError()`
+#### Changed
+- **Deprecation**: `validateParams()` will be deprecated in next major version, in favour of: `enrichError()`
    Validation of input parameters and returned result is now responsability of mini-client & mini-service.
    `enrichError()` ensures that Joi `ValidationError`, when thrown, get enriched and turned into consistent
    Boom errors
 - Dependencies update
 
+
 ## 2.3.0
+### Added
 - Expose CRC32 checksum header name
+
+#### Changed
 - Dependencies update
 
+
 ## 2.2.1
-- Add extractValidate that allow validation objects in options
+### Added
+- `extractValidate()` function allowing validation objects in options
 - Include API name in validation errors
+
+#### Changed
 - Better documentation
 
+
 ## 2.0.0
-- Rename service to group
-- Introduce extractGroup()
-- Upgrade all deps to latests
+### Added
+- Introduce `extractGroup()`
+
+#### Changed
+- **Breaking**: Rename service to group
 - Use husky instead of ghooks
+- Dependencies update
+
 
 ## 1.0.0
+### Added
 - initial release
