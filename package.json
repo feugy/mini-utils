@@ -21,27 +21,27 @@
     "update-deps": "next-update -k true"
   },
   "dependencies": {
-    "acorn": "~5.5.0",
-    "boom": "~7.1.1",
+    "acorn": "~5.5.3",
+    "boom": "~7.2.0",
     "bunyan": "~2.0.2",
-    "joi": "~13.1.1"
+    "joi": "~13.2.0"
   },
   "devDependencies": {
-    "coveralls": "~3.0.0",
     "chokidar-cli": "~1.2.0",
+    "coveralls": "~3.0.1",
     "docma": "~2.1.0",
-    "eslint": "~4.16.0",
-    "eslint-config-standard": "~10.2.1",
-    "eslint-plugin-import": "~2.8.0",
-    "eslint-plugin-node": "~5.2.1",
-    "eslint-plugin-promise": "~3.6.0",
-    "eslint-plugin-standard": "~3.0.1",
+    "eslint": "~4.19.1",
+    "eslint-config-standard": "~11.0.0",
+    "eslint-plugin-import": "~2.11.0",
+    "eslint-plugin-node": "~6.0.1",
+    "eslint-plugin-promise": "~3.7.0",
+    "eslint-plugin-standard": "~3.1.0",
     "husky": "~0.14.3",
-    "lab": "~15.2.0",
-    "lab-espower-transformer": "~2.0.0",
+    "lab": "~15.4.1",
+    "lab-espower-transformer": "~2.0.1",
     "next-update": "~3.6.0",
-    "nsp": "~2.8.1",
-    "power-assert": "~1.4.4",
-    "rewire": "~3.0.2"
+    "nsp": "~3.2.1",
+    "power-assert": "~1.5.0",
+    "rewire": "~4.0.1"
   }
 }
