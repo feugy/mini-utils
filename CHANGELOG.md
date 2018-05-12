@@ -1,6 +1,10 @@
-# Changelog
+# 4.0.0
 
 ## Unreleased
+#### Added
+- `loadTransport()` which validates incoming options and loads selected transport 
+- `optionSchema` Joi schema used to validate incoming options
+
 #### Changed
 - Reformat CHANGELOG to follow [Keep a Changelog](https://keepachangelog.com) recommandations
 - New documentation with latest docma v2.0.0
