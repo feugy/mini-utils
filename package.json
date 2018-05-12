@@ -1,6 +1,6 @@
 {
   "name": "mini-service-utils",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "Shared utilities mini-* libraries: Micro services done simply",
   "author": "feugy <damien.feugas@gmail.com>",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "acorn": "~5.5.3",
     "boom": "~7.2.0",
     "bunyan": "~2.0.2",
-    "joi": "~13.2.0"
+    "joi": "~13.3.0"
   },
   "devDependencies": {
     "chokidar-cli": "~1.2.0",
@@ -37,7 +37,7 @@
     "eslint-plugin-promise": "~3.7.0",
     "eslint-plugin-standard": "~3.1.0",
     "husky": "~0.14.3",
-    "lab": "~15.4.1",
+    "lab": "~15.4.4",
     "lab-espower-transformer": "~2.0.1",
     "next-update": "~3.6.0",
     "nsp": "~3.2.1",

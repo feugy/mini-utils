@@ -551,4 +551,27 @@ describe('Utilities', () => {
       assert.throws(() => utils.extractGroups({groups: ['not a group']}), /Group definition at position 0/)
     })
   })
+
+  describe('loadTransport', () => {
+    const logger = {
+      debug: () => {},
+      info: () => {}
+    }
+
+    it('should assert incoming options', () => {
+      assert.throws(() => {
+        utils.loadTransport({transport: {type: 'Whatever'}}, require)
+      }, /"logger" is required/)
+    })
+
+    it('should report unknown transport', () => {
+      assert.throws(() => {
+        utils.loadTransport({transport: {type: 'unknown'}, logger}, require)
+      }, /Cannot load transport unknown/)
+    })
+
+    it('should report existing transport', () => {
+      assert.strictEqual(utils.loadTransport({transport: {type: 'test'}, logger}, require), 'yeah')
+    })
+  })
 })
