@@ -1,12 +1,12 @@
 const Lab = require('lab')
 const Joi = require('joi')
-const {badRequest} = require('boom')
+const { badRequest } = require('boom')
 const assert = require('power-assert')
 const rewire = require('rewire')
 const utils = rewire('../')
 
 const lab = exports.lab = Lab.script()
-const {describe, it, beforeEach} = lab
+const { describe, it, beforeEach } = lab
 
 describe('Utilities', () => {
   /* eslint no-empty-function: 0 */
@@ -39,7 +39,7 @@ describe('Utilities', () => {
         [id]: () => {}
       }
       const validation = Joi.array()
-      assert.deepStrictEqual(utils.extractValidate(id, apis, {validate: validation}), validation)
+      assert.deepStrictEqual(utils.extractValidate(id, apis, { validate: validation }), validation)
     })
 
     it('should extract another clause from opts', () => {
@@ -49,7 +49,7 @@ describe('Utilities', () => {
       }
       const validation = Joi.array()
       assert.deepStrictEqual(
-        utils.extractValidate(id, apis, {responseSchema: validation}, 'responseSchema'),
+        utils.extractValidate(id, apis, { responseSchema: validation }, 'responseSchema'),
         validation
       )
     })
@@ -88,7 +88,7 @@ describe('Utilities', () => {
     })
 
     it('should be customizable', () => {
-      const logger = utils.getLogger({name: 'toto'})
+      const logger = utils.getLogger({ name: 'toto' })
       assert(logger)
       assert(logger.debug)
       assert.equal(logger.fields.name, 'toto')
@@ -97,7 +97,7 @@ describe('Utilities', () => {
 
   describe('arrayToObj', () => {
     it('should transform an array to an object', () => {
-      assert.deepStrictEqual(utils.arrayToObj([1, 2], ['count', 'other']), {count: 1, other: 2})
+      assert.deepStrictEqual(utils.arrayToObj([1, 2], ['count', 'other']), { count: 1, other: 2 })
     })
 
     it('should keep unexpected items in result', () => {
@@ -116,7 +116,7 @@ describe('Utilities', () => {
     })
 
     it('should allow plain object', () => {
-      assert(utils.isApi({method: () => {}, attribute: 1}))
+      assert(utils.isApi({ method: () => {}, attribute: 1 }))
     })
 
     it('should allow class instances', () => {
@@ -146,7 +146,7 @@ describe('Utilities', () => {
   })
 
   describe('enrichError', () => {
-    const validationError = Joi.object({other: Joi.string().required()}).validate({count: 1}).error
+    const validationError = Joi.object({ other: Joi.string().required() }).validate({ count: 1 }).error
 
     it('should return null if no error', () => {
       assert(utils.enrichError(null, '') === null)
@@ -449,27 +449,27 @@ describe('Utilities', () => {
       tests: [{
         name: 'function declaration',
         code: () => {
-          function declared (a, {b: [d]}, c) {}
+          function declared (a, { b: [d] }, c) {}
           return declared
         }
       }, {
         name: 'async function declaration',
         code: () => {
-          async function declared (a, {b: {d}}, c) {}
+          async function declared (a, { b: { d } }, c) {}
           return declared
         }
       }, {
         name: 'anonymous function',
-        code: () => function (a, {b, d}, c) {}
+        code: () => function (a, { b, d }, c) {}
       }, {
         name: 'async anonymous function',
         code: () => async function (a, [b], c) {}
       }, {
         name: 'named function',
-        code: () => function named (a, {b}, c) {}
+        code: () => function named (a, { b }, c) {}
       }, {
         name: 'async named function',
-        code: () => async function named (a, {b}, c) {}
+        code: () => async function named (a, { b }, c) {}
       }, {
         name: 'function shortcut',
         code: () => {
@@ -482,7 +482,7 @@ describe('Utilities', () => {
         name: 'async function shortcut',
         code: () => {
           const obj = {
-            async named (a, {b} = {}, c) {}
+            async named (a, { b } = {}, c) {}
           }
           return obj.named
         }
@@ -491,13 +491,13 @@ describe('Utilities', () => {
         code: () => (a, [b] = [], c) => {}
       }, {
         name: 'async arrow function',
-        code: () => async (a, {b}, c) => {}
+        code: () => async (a, { b }, c) => {}
       }]
     }]
 
-    suites.forEach(({name, expected, tests}) => {
+    suites.forEach(({ name, expected, tests }) => {
       describe(name, () => {
-        tests.forEach(({name, code}) => {
+        tests.forEach(({ name, code }) => {
           it(`should handle ${name}`, () => {
             assert.deepStrictEqual(utils.getParamNames(code()), expected)
           })
@@ -510,9 +510,9 @@ describe('Utilities', () => {
     it('should get group from parameters', () => {
       const name = 'test'
       const init = noop
-      assert.deepStrictEqual(utils.extractGroups({name, init}), {
-        groups: [{name, init}],
-        groupOpts: {[name]: {name, init}}
+      assert.deepStrictEqual(utils.extractGroups({ name, init }), {
+        groups: [{ name, init }],
+        groupOpts: { [name]: { name, init } }
       })
     })
 
@@ -522,9 +522,9 @@ describe('Utilities', () => {
       const name2 = 'test2'
       const init2 = noop
       assert.deepStrictEqual(utils.extractGroups({
-        groups: [{name: name1, init: init1}, {name: name2, init: init2}]
+        groups: [{ name: name1, init: init1 }, { name: name2, init: init2 }]
       }), {
-        groups: [{name: name1, init: init1}, {name: name2, init: init2}],
+        groups: [{ name: name1, init: init1 }, { name: name2, init: init2 }],
         groupOpts: {}
       })
     })
@@ -535,20 +535,20 @@ describe('Utilities', () => {
       const name2 = 'test2'
       const init2 = noop
       assert.deepStrictEqual(utils.extractGroups({
-        groups: [{name: name1, init: init1}, {name: name1, init: init1}],
-        groupOpts: {[name1]: {name: name1}, [name2]: {name: name2}}
+        groups: [{ name: name1, init: init1 }, { name: name1, init: init1 }],
+        groupOpts: { [name1]: { name: name1 }, [name2]: { name: name2 } }
       }), {
-        groups: [{name: name1, init: init1}, {name: name1, init: init2}],
-        groupOpts: {[name1]: {name: name1}, [name2]: {name: name2}}
+        groups: [{ name: name1, init: init1 }, { name: name1, init: init2 }],
+        groupOpts: { [name1]: { name: name1 }, [name2]: { name: name2 } }
       })
     })
 
     it('should fail if no group found', () => {
-      assert.throws(() => utils.extractGroups({name: 'test'}), /No APIs nor APIs groups defined/)
+      assert.throws(() => utils.extractGroups({ name: 'test' }), /No APIs nor APIs groups defined/)
     })
 
     it('should fail on invalid group found', () => {
-      assert.throws(() => utils.extractGroups({groups: ['not a group']}), /Group definition at position 0/)
+      assert.throws(() => utils.extractGroups({ groups: ['not a group'] }), /Group definition at position 0/)
     })
   })
 
@@ -560,18 +560,18 @@ describe('Utilities', () => {
 
     it('should assert incoming options', () => {
       assert.throws(() => {
-        utils.loadTransport({transport: {type: 'Whatever'}}, require)
+        utils.loadTransport({ transport: { type: 'Whatever' } }, require)
       }, /"logger" is required/)
     })
 
     it('should report unknown transport', () => {
       assert.throws(() => {
-        utils.loadTransport({transport: {type: 'unknown'}, logger}, require)
+        utils.loadTransport({ transport: { type: 'unknown' }, logger }, require)
       }, /Cannot load transport unknown/)
     })
 
     it('should report existing transport', () => {
-      assert.strictEqual(utils.loadTransport({transport: {type: 'test'}, logger}, require), 'yeah')
+      assert.strictEqual(utils.loadTransport({ transport: { type: 'test' }, logger }, require), 'yeah')
     })
   })
 })

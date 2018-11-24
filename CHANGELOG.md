@@ -1,6 +1,13 @@
-# 4.0.0
+# Changelog
 
-## Unreleased
+## 4.0.1
+#### Changed
+- Use latest standard formatting
+- Remove NSP since it was decomissioned
+- Use yarn instead of NPM
+- Dependencies update
+
+## 4.0.0
 #### Added
 - `loadTransport()` which validates incoming options and loads selected transport 
 - `optionSchema` Joi schema used to validate incoming options
