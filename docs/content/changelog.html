@@ -1,8 +1,22 @@
 
 <html><head></head><body><h1 id="changelog">Changelog</h1>
 <hr />
-<h2 id="unreleased">Unreleased</h2>
+<h2 id="401">4.0.1</h2>
 <hr />
+<h4 id="changed">Changed</h4>
+<ul>
+<li>Use latest standard formatting</li>
+<li>Remove NSP since it was decomissioned</li>
+<li>Use yarn instead of NPM</li>
+<li>Dependencies update</li>
+</ul>
+<h2 id="400">4.0.0</h2>
+<hr />
+<h4 id="added">Added</h4>
+<ul>
+<li><code>loadTransport()</code> which validates incoming options and loads selected transport </li>
+<li><code>optionSchema</code> Joi schema used to validate incoming options</li>
+</ul>
 <h4 id="changed">Changed</h4>
 <ul>
 <li>Reformat CHANGELOG to follow <a href="https://keepachangelog.com">Keep a Changelog</a> recommandations</li>
@@ -19,17 +33,14 @@
 <hr />
 <h4 id="fixed">Fixed</h4>
 <ul>
-<li><code>getParamNames()</code> supports async functions with single parameter shortcut: `<pre><code class="lang-js"> getParamNames(async a =&gt; {}) === ['a']
-</code></pre>
+<li><code>getParamNames()</code> supports async functions with single parameter shortcut: `<pre><code class="js"> getParamNames(async a =&gt; {}) === ['a']</code></pre>
 </li>
 </ul>
 <h4 id="changed">Changed</h4>
 <ul>
-<li><strong>Breaking</strong>: <code>getParamNames()</code> supports rest parameters:<pre><code class="lang-js"> getParamNames((a, b, ...rest) =&gt; {}) === ['a', 'b', 'rest']
-</code></pre>
+<li><strong>Breaking</strong>: <code>getParamNames()</code> supports rest parameters:<pre><code class="js"> getParamNames((a, b, ...rest) =&gt; {}) === ['a', 'b', 'rest']</code></pre>
  It used to throw an Error</li>
-<li><strong>Breaking</strong>: <code>getParamNames()</code> supports destructured parameters:<pre><code class="lang-js"> getParamNames((a, {b: [c]}, [d, e], f) =&gt; {}) === ['a', 'param1', 'param2', 'f']
-</code></pre>
+<li><strong>Breaking</strong>: <code>getParamNames()</code> supports destructured parameters:<pre><code class="js"> getParamNames((a, {b: [c]}, [d, e], f) =&gt; {}) === ['a', 'param1', 'param2', 'f']</code></pre>
  It used to throw an Error</li>
 <li><strong>Breaking</strong>: Removed: <code>validateParams()</code> deprecated function</li>
 </ul>

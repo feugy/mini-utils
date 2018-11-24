@@ -1,4 +1,4 @@
-const {getLogger} = require('../')
+const { getLogger } = require('../')
 
 // store logger levels for further restoration
 let loggerLevels = null
@@ -20,7 +20,7 @@ exports.shutdownLogger = () =>
  */
 exports.restoreLogger = () =>
   new Promise(resolve => {
-    for (const {level, i} of loggerLevels.entries()) {
+    for (const { level, i } of loggerLevels.entries()) {
       getLogger().level(i, level)
     }
     resolve()

@@ -1,7 +1,6 @@
 # Minimalist µServices
 
 [![NPM Version][npm-badge]][npm-url]
-[![NSP Status][nsp-badge]][nsp-url]
 [![Dependencies][david-badge]][david-url]
 [![Build][travis-badge]][travis-url]
 [![Test Coverage][coveralls-badge]][coveralls-url]
